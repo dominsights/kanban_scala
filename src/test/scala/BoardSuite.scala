@@ -28,3 +28,18 @@ class BoardSuite extends munit.FunSuite:
     )
     assertEquals(2, newChecklist.items.size)
   }
+
+  test("should complete checklist item in checklist list") {
+    val checklistItem = CheckListItem("item", false)
+    val checklist = CheckList("checklist", List(checklistItem))
+    val newChecklist =
+      completeChecklistItem(0, checklistItem, Some(List(checklist)))
+    assertTrue(newChecklist.get(0).items(0).completed)
+  }
+
+  test("should complete checklist item in checklist") {
+    val checklistItem = CheckListItem("item", false)
+    val checklist = CheckList("checklist", List(checklistItem))
+    val newChecklist = completeChecklistItem(checklistItem, checklist)
+    assertTrue(newChecklist.items(0).completed)
+  }

@@ -34,4 +34,30 @@ def addChecklistItem(
     checklist: CheckList
 ): CheckList =
   val newItems: List[CheckListItem] = checklist.items :+ item
-  CheckList(checklist.title, newItems)
+  checklist.copy(items = newItems)
+
+def completeChecklistItem(
+    checklistItem: Int,
+    item: CheckListItem,
+    checklists: Option[List[CheckList]]
+): Option[List[CheckList]] =
+  checklists match
+    case Some(checklists) =>
+      val checklist = checklists(checklistItem)
+      val newChecklists =
+        checklists.updated(
+          checklistItem,
+          completeChecklistItem(item, checklist)
+        )
+      Some(newChecklists)
+    case None =>
+      None
+
+def completeChecklistItem(
+    item: CheckListItem,
+    checklist: CheckList
+): CheckList =
+  val index = checklist.items.indexOf(item)
+  val newItems =
+    checklist.items.updated(index, item.copy(completed = true))
+  checklist.copy(items = newItems)
