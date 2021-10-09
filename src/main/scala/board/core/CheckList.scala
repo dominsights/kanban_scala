@@ -10,7 +10,7 @@ class CheckList private(val title: String, val items: List[CheckListItem]) {
   def setPosition(i: Int, item: CheckListItem) =
     if i > items.size - 1 then this
     else
-      val (left, right) = items.splitAt(i)
+      val (left, right) = items.filterNot(_ == item).splitAt(i)
       CheckList(title, left ::: item :: right)
 
   def completeItem(item: CheckListItem) =
