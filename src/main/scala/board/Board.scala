@@ -16,6 +16,7 @@ case class Card(
 )
 
 def addChecklistItem(
+    addItem: (CheckListItem, CheckList) => CheckList,
     checklistIndex: Int,
     item: CheckListItem,
     checklists: Option[List[CheckList]]
@@ -24,7 +25,7 @@ def addChecklistItem(
     case Some(checklists) =>
       val checklist = checklists(checklistIndex)
       val newChecklists =
-        checklists.updated(checklistIndex, addChecklistItem(item, checklist))
+        checklists.updated(checklistIndex, addItem(item, checklist))
       Some(newChecklists)
     case None =>
       None
@@ -37,6 +38,7 @@ def addChecklistItem(
   checklist.copy(items = newItems)
 
 def completeChecklistItem(
+    completeItem: (CheckListItem, CheckList) => CheckList,
     checklistItem: Int,
     item: CheckListItem,
     checklists: Option[List[CheckList]]
@@ -47,7 +49,7 @@ def completeChecklistItem(
       val newChecklists =
         checklists.updated(
           checklistItem,
-          completeChecklistItem(item, checklist)
+          completeItem(item, checklist)
         )
       Some(newChecklists)
     case None =>

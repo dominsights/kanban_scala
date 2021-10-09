@@ -10,6 +10,7 @@ class BoardSuite extends munit.FunSuite:
     assertEquals(1, checklist.items.size)
 
     val newChecklist = addChecklistItem(
+      addChecklistItem,
       0,
       CheckListItem("new item", false),
       Some(List(checklist))
@@ -33,7 +34,12 @@ class BoardSuite extends munit.FunSuite:
     val checklistItem = CheckListItem("item", false)
     val checklist = CheckList("checklist", List(checklistItem))
     val newChecklist =
-      completeChecklistItem(0, checklistItem, Some(List(checklist)))
+      completeChecklistItem(
+        completeChecklistItem,
+        0,
+        checklistItem,
+        Some(List(checklist))
+      )
     assertTrue(newChecklist.get(0).items(0).completed)
   }
 
