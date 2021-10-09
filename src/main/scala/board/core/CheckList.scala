@@ -14,9 +14,7 @@ class CheckList private(val title: String, val items: List[CheckListItem]) {
       CheckList(title, left ::: item :: right)
 
   def completeItem(item: CheckListItem) =
-    val newItems = items.map {
-      case i => if i == item then item.complete() else i
-    }
+    val newItems = items.map(i => if i == item then item.complete() else i)
     CheckList(title, newItems)
 }
 
