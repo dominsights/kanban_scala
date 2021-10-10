@@ -38,6 +38,10 @@ class Card private(val title: String, val description: String, val id: UUID,
         case None => Card(title, description, id, checklists, dueDate, Some(List(member)))
     else this
 
+  def removeMember(member: Member) = members match
+    case Some(m) => Card(title, description, id, checklists, dueDate, Some(m.filterNot(_ == member)))
+    case None => this
+
   def canEqual(other: Any): Boolean = other.isInstanceOf[Card]
 
   override def equals(other: Any): Boolean = other match
