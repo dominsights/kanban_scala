@@ -15,6 +15,8 @@ class CardList private(val id: UUID, val cards: List[Card], val title: String) {
 
   def isEmpty = cards.isEmpty
 
+  def size = cards.size
+
   def canEqual(other: Any): Boolean = other.isInstanceOf[CardList]
 
   override def equals(other: Any): Boolean = other match
