@@ -43,9 +43,3 @@ def addMember(card: Card_func, member: Member, memberValidator: Member => Boolea
 def removeMember(card: Card_func, member: Member) = card.members match
   case Some(m) => card.copy(members = Some(m.filterNot(_ == member)))
   case None => card
-
-object Card_func {
-  def newCard(title: String, description: String, cardId: UUID) = Card_func(title, description, cardId, None, None, None)
-
-  def hydrateCard(id: UUID, title: String, description: String) = Card_func(title, description, id, None, None, None)
-}
